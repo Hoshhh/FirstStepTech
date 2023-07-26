@@ -27,6 +27,7 @@ model Account {
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
     @@map(name: "accounts")
 }
 
@@ -37,6 +38,7 @@ model Session {
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+    @@index([userId])
     @@map(name: "sessions")
 }
 
