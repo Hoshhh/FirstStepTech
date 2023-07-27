@@ -31,31 +31,25 @@ model Account {
     @@map(name: "accounts")
 }
 
-model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-    @@index([userId])
-    @@map(name: "sessions")
-}
-
 model User {
-    id            String    @id @default(cuid())
+    id            String         @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?        @unique
     emailVerified DateTime?
     image         String?
+    skills        String?
+    about         String?
+    links         String?
+    availability  String?
     accounts      Account[]
-    sessions      Session[]
+    UserFeedbacks UserFeedback[]
 }
 
-model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+model UserFeedback {
+    id        String   @id @default(cuid())
+    createdAt DateTime
+    recipient User     @relation(fields: [userId], references: [id])
+    userId    String
 
-    @@unique([identifier, token])
+    @@index([userId])
 }
