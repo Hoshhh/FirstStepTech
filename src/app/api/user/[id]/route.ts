@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
 import { db } from '@/lib/db'
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
 
     const origin = request.headers.get('origin')
     try {
@@ -11,13 +10,13 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             }
         })
 
-        return new NextResponse(JSON.stringify(currentUser), {
+        return new Response(JSON.stringify(currentUser), {
             headers: {
                 'Access-Control-Allow-Origin': origin || "*",
                 'Content-Type': 'application/json'
             }
         })
     } catch (error) {
-        return new NextResponse("Database error", {status: 500})
+        return new Response("Database error", {status: 500})
     }
 }
