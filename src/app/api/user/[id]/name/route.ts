@@ -24,7 +24,8 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
                 id: params.id
             },
             data: {
-                name: `${payload.firstName} ${payload.lastName}`
+                firstName: payload.firstName,
+                lastName: payload.lastName
             }
         })
 

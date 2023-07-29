@@ -16,6 +16,17 @@ Returns JSON data about a specific user
 Returns JSON data about a specific user's about section
 <br>
 
+Updates a specific user's first and last name
+<br>
+
+- **URL**
+
+  /api/user/[id]/about
+
+* **Method**
+
+  `PATCH`
+
 - **URL**
 
   /api/user/[id]/about
