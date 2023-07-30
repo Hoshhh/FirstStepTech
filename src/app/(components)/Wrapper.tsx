@@ -7,7 +7,7 @@ export default async function Wrapper({children,}: {children: React.ReactNode}) 
     if (session !== null) {
         if (session.user.firstName === null || session.user.lastName === null) {
             return (
-                <NameForm />
+                <NameForm id={session.user.id} />
             )
         }
     }

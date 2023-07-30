@@ -7,12 +7,11 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     const origin = request.headers.get('origin')
 
     try {
-        /*
         //Check if the user is authenticated and has access to this user
         const session = await getCurrentSession()
         if (!session?.user || params.id !== session?.user.id) {
             return new NextResponse(null, { status: 403})
-        }*/
+        }
 
         //Get the request body and validate it
         const body = await request.json()
