@@ -11,15 +11,15 @@ This tool is for finding junior level talent because once you combine all forms 
 
 ### Landing Page
 
-<img src="https://i.imgur.com/Xtug8zx.png" alt="Landing Page" width="600"/>
+<img src="https://i.imgur.com/Xtug8zx.png" alt="Landing Page" width="800"/>
 
 ### Applications Page
 
-<img src="https://i.imgur.com/RY8JCuP.png" alt="Applications Page" width="600"/>
+<img src="https://i.imgur.com/RY8JCuP.png" alt="Applications Page" width="800"/>
 
 ### Dashboard
 
-<img src="https://i.imgur.com/E6mAObW.png" alt="Applications Page" width="600"/>
+<img src="https://i.imgur.com/E6mAObW.png" alt="Applications Page" width="800"/>
 
 ## API/User
 
