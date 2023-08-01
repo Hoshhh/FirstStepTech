@@ -1,4 +1,4 @@
-import { getCurrentSession, getCurrentUser } from '@/lib/session'
+import { getCurrentUser } from '@/lib/session'
 import Hero from './(components)/Hero'
 import Info from './(components)/Info'
 import Navbar from './(components)/Navbar'
@@ -8,7 +8,7 @@ export default async function Home() {
   console.log(user)
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} />
       <Hero />
       <Info />
     </div>

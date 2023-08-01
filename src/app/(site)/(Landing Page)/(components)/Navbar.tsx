@@ -1,12 +1,15 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu, AiFillCaretDown } from "react-icons/ai";
+import { signIn } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 
-const Navbar = () => {
+const Navbar = ({user}: {user:any}) => {
   const [nav, setNav] = useState(false);
   const [shadow, setShow] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     const handleShadow = () => {
@@ -23,7 +26,11 @@ const Navbar = () => {
     setNav(!nav);
   };
 
+  const handleProfileClick = () => {
+    setShowDropdown(!showDropdown);
+  };
 
+  console.log(user)
   return (
     <nav
       style={{ backgroundColor: "#f1f5f9" }}
@@ -51,7 +58,38 @@ const Navbar = () => {
               </li>
             </Link>
           </ul>
-            <button className="hidden md:flex ml-10  p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700">Sign In</button>
+
+          { !user ? (
+            <button onClick={() => signIn()} className="hidden md:flex ml-10  p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700">Sign In</button>
+          ) : (
+              <div className="relative ml-10 hover:cursor-pointer" onClick={handleProfileClick}>
+                <div className="flex flex-col justify-center items-center">
+                  <img 
+                      src={user?.image} 
+                      alt="Profile Picture" 
+                      className="w-10 h-10 hidden md:flex rounded-full shadow-md shadow-gray-400 hover:cursor-pointer" 
+                  />
+                  <div className="hidden md:flex md:flex-row">
+                    <p>{user.firstName}</p>
+                    <AiFillCaretDown />
+                  </div>
+                </div>
+                { showDropdown && (
+                    <div className="absolute right-0 mt-2 w-40 bg-white rounded shadow">
+                        <ul className="py-2">
+                            <li className="px-4 py-2 hover:bg-gray-200">
+                                <Link href={`/user/${user?.id}/about`}>Profile</Link>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-gray-200" onClick={() => signOut()}>
+                                Sign Out
+                            </li>
+                        </ul>
+                    </div>
+                )}
+              </div>
+            )
+          }
+
           <div onClick={handleNav} className="md:hidden">
             <AiOutlineMenu size={25} />
           </div>
@@ -104,7 +142,15 @@ const Navbar = () => {
                 </li>
               </Link>
             </ul>
-            <button className="mt-12 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700">Sign In</button>
+            {!user ? (
+              <button className="mt-12 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700">Sign In</button>
+            ) : (
+              <div className="flex flex-col">
+                <Link href={`/user/${user?.id}/about`} className="mt-12 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700 text-center">Profile</Link>
+                <button className="mt-4 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700">Sign Out</button>
+              </div>
+            )
+            }
             </div>
         </div>
       </div>
