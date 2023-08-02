@@ -30,7 +30,7 @@ export default async function UserLayout({
         </div>
         <SignoutButton />
       </div>
-      <div className='flex col-span-3 justify-center items-center pb-4'>
+      <div className='flex col-span-3 justify-center pb-4'>
         {children}
       </div>
     </div>
