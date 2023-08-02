@@ -1,12 +1,49 @@
-import React from 'react'
+'use client'
 
-export default function Container({ section, children }: {section: string, children: React.ReactNode}) {
+import { useEffect, useState } from "react"
+import { FaEdit } from "react-icons/fa"
+import SkillsModal from "./SkillsModal"
+
+type Container = {
+    section: string,
+    id: string,
+    sessionId: string | undefined,
+    modalHeader: string,
+    modalDesc: string
+}
+
+export default function Container({ section, id, sessionId, modalHeader, modalDesc }: Container) {
+    const [isUser, setIsUser] = useState(false)
+    const [showModal, setShowModale] = useState(false)
+
+    useEffect(() => {
+        if (id === sessionId) {
+            setIsUser(true)
+        } else {
+            setIsUser(false)
+        }
+    }, [sessionId, id])
+
   return (
-    <div className='w-2/3 h-auto shadow-xl shadow-gray-400 rounded-xl flex flex-col p-2 hover:scale-105 ease-in duration-300'>
-        <h2 className='tracking-widest mb-4'>
-            {section}
-        </h2>
-        {children}
+    <div className='w-2/3 h-auto shadow-xl shadow-gray-400 rounded-xl flex flex-col p-4 mb-16'>
+        <div className="flex justify-between">
+            <h2 className='tracking-widest mb-4'>
+                {section}
+            </h2>
+            { isUser ?
+                <button 
+                className="p-2 pl-4 pr-4 text-sm uppercase rounded-full text-slate-100 bg-sky-700 mb-8"
+                onClick={() => setShowModale(true)}
+                >Edit</button>
+                : ""
+            }
+        </div>
+        <div>
+            Actual data returned from api
+        </div>
+        <SkillsModal isVisible={showModal} onClose={() => setShowModale(false)} modalHeader={modalHeader} modalDesc={modalDesc} >
+            form
+        </SkillsModal>
     </div>
   )
 }
