@@ -30,7 +30,6 @@ const Navbar = ({user}: {user:any}) => {
     setShowDropdown(!showDropdown);
   };
 
-  console.log(user)
   return (
     <nav
       style={{ backgroundColor: "#f1f5f9" }}
@@ -78,7 +77,7 @@ const Navbar = ({user}: {user:any}) => {
                     <div className="absolute right-0 mt-2 w-40 bg-white rounded shadow">
                         <ul className="py-2">
                             <li className="px-4 py-2 hover:bg-gray-200">
-                                <Link href={`/user/${user?.id}/about`}>Profile</Link>
+                                <Link href={`/user/${user?.id}`}>Profile</Link>
                             </li>
                             <li className="px-4 py-2 hover:bg-gray-200" onClick={() => signOut()}>
                                 Sign Out
@@ -146,7 +145,7 @@ const Navbar = ({user}: {user:any}) => {
               <button className="mt-12 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700">Sign In</button>
             ) : (
               <div className="flex flex-col">
-                <Link href={`/user/${user?.id}/about`} className="mt-12 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700 text-center">Profile</Link>
+                <Link href={`/user/${user?.id}`} className="mt-12 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700 text-center">Profile</Link>
                 <button className="mt-4 p-2 text-sm uppercase rounded-full text-slate-100 bg-sky-700">Sign Out</button>
               </div>
             )

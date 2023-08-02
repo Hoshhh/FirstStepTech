@@ -14,7 +14,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
             headers: {
                 'Access-Control-Allow-Origin': origin || "*",
                 'Content-Type': 'application/json'
-            }
+            },
+            status: 200
         })
     } catch (error) {
         return new Response("Database error", {status: 500})
