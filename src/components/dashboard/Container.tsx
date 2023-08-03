@@ -2,17 +2,18 @@
 
 import { useEffect, useState } from "react"
 import { FaEdit } from "react-icons/fa"
-import SkillsModal from "./SkillsModal"
+import Modal from "./Modal"
 
 type Container = {
     section: string,
     id: string,
     sessionId: string | undefined,
     modalHeader: string,
-    modalDesc: string
+    modalDesc: string,
+    children: React.ReactNode
 }
 
-export default function Container({ section, id, sessionId, modalHeader, modalDesc }: Container) {
+export default function Container({ section, id, sessionId, modalHeader, modalDesc, children }: Container) {
     const [isUser, setIsUser] = useState(false)
     const [showModal, setShowModale] = useState(false)
 
@@ -27,7 +28,7 @@ export default function Container({ section, id, sessionId, modalHeader, modalDe
   return (
     <div className='w-2/3 h-auto shadow-xl shadow-gray-400 rounded-xl flex flex-col p-4 mb-16'>
         <div className="flex justify-between">
-            <h2 className='tracking-widest mb-4'>
+            <h2 className='tracking-widest mb-4 text-3xl'>
                 {section}
             </h2>
             { isUser ?
@@ -41,9 +42,9 @@ export default function Container({ section, id, sessionId, modalHeader, modalDe
         <div>
             Actual data returned from api
         </div>
-        <SkillsModal isVisible={showModal} onClose={() => setShowModale(false)} modalHeader={modalHeader} modalDesc={modalDesc} >
-            form
-        </SkillsModal>
+        <Modal isVisible={showModal} onClose={() => setShowModale(false)} modalHeader={modalHeader} modalDesc={modalDesc} >
+            {children}
+        </Modal>
     </div>
   )
 }
