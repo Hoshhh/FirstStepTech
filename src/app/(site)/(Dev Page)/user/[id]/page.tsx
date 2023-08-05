@@ -1,3 +1,4 @@
+import AboutForm from '@/components/dashboard/AboutForm'
 import Container from '@/components/dashboard/Container'
 import SkillsForm from '@/components/dashboard/SkillsForm'
 import { getCurrentSession } from '@/lib/session'
@@ -31,7 +32,9 @@ export default async function page({ params }: {
         sessionId={session?.user.id} 
         modalHeader={modal.aboutHeader} 
         modalDesc={modal.aboutDesc} 
-      >Test2</Container>
+      >
+        <AboutForm id={params.id} />
+      </Container>
     </div>
   )
 }
