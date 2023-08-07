@@ -4,6 +4,7 @@ import React from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { useRouter } from 'next/navigation'
 
 type FormData = z.infer<typeof nameSchema>
 
@@ -16,6 +17,8 @@ export default function NameForm({ id }: {id: string}) {
         resolver: zodResolver(nameSchema),
     })
 
+    const router = useRouter()
+
     const onSubmit = async (data:FormData) => {
         await fetch(`/api/user/${id}/name`, {
             method: 'PATCH',
@@ -24,6 +27,7 @@ export default function NameForm({ id }: {id: string}) {
                 lastName: data.lastName
             })
         })
+        router.refresh()
     }
 
   return (

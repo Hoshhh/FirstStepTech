@@ -10,13 +10,13 @@ export default async function page({ params }: {
   const session = await getCurrentSession()
   const modal = {
     skillsHeader : "Edit your skills",
-    skillsDesc : "List your strongest skills",
+    skillsDesc : "List your 6 strongest technical skills",
     aboutHeader : "Edit your about section",
-    aboutDesc : "Let people know what you're about!",
+    aboutDesc : "Let people know about you!",
   }
 
   return (
-    <div className='flex flex-col w-3/4 items-center mt-32'>
+    <div className='flex flex-col w-full sm:w-3/4 items-center mt-32'>
       <Container 
         section="Skills" 
         id={params.id} 
