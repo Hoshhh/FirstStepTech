@@ -1,5 +1,5 @@
 import * as z from "zod"
 
 export const skillsSchema = z.object({
-    skills: z.string().nonempty(),
+    skills: z.array(z.string()).nonempty(),
 })
