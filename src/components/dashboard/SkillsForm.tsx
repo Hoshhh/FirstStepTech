@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import * as z from 'zod'
 import { skillsSchema } from '@/lib/validations/skills';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 type FormData = z.infer<typeof skillsSchema>
 
@@ -11,14 +12,21 @@ export default function SkillsForm({ id }: { id: string }) {
   const inputStyle = "my-2 p-2 border border-slate-300 rounded w-full";
   const form = useForm<FormData>({
     defaultValues: {
-      skills: ["", "", "", "", "", ""]
-    }
+      skills: []
+    },
+    resolver: zodResolver(skillsSchema)
   })
 
   const { register, control, handleSubmit, formState } = form
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     console.log('\n ---Form submitted!--- \n', JSON.stringify(data.skills))
+    await fetch(`/api/user/${id}/skills`, {
+      method: 'PATCH',                                                              
+      body: JSON.stringify({
+        skills: JSON.stringify(data.skills)
+      })                          
+    })
   }
 
   return (

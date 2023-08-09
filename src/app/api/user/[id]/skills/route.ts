@@ -15,15 +15,13 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
         //Get the request body and validate it
         const body = await request.json()
-        const payload = skillsSchema.parse(body)
-
 
         const updateSkills = await db.user.update({
             where: {
                 id: params.id
             },
             data: {
-                skills: payload.skills
+                skills: body.skills
             }
         })
 
