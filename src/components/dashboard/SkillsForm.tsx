@@ -8,25 +8,31 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 type FormData = z.infer<typeof skillsSchema>
 
-export default function SkillsForm({ id }: { id: string }) {
+export default function SkillsForm({ id, skills }: { id: string, skills: string }) {
   const inputStyle = "my-2 p-2 border border-slate-300 rounded w-full";
+  const userSkills = JSON.parse(skills)
+
   const form = useForm<FormData>({
     defaultValues: {
-      skills: []
+      skills: [userSkills[0], userSkills[1], userSkills[2], userSkills[3], userSkills[4], userSkills[5]]
     },
     resolver: zodResolver(skillsSchema)
   })
 
+  const router = useRouter()
   const { register, control, handleSubmit, formState } = form
 
   const onSubmit = async (data: FormData) => {
     console.log('\n ---Form submitted!--- \n', JSON.stringify(data.skills))
+
     await fetch(`/api/user/${id}/skills`, {
       method: 'PATCH',                                                              
       body: JSON.stringify({
         skills: JSON.stringify(data.skills)
       })                          
     })
+
+    router.refresh()
   }
 
   return (
