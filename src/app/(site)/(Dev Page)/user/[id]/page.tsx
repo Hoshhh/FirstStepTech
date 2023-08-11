@@ -41,7 +41,7 @@ export default async function page({ params }: {
         isArray={false} 
         data={user.about}
       >
-        <AboutForm id={params.id} />
+        <AboutForm id={params.id} about={user.about} />
       </Container>
     </div>
   )

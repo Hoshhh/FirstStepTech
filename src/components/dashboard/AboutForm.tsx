@@ -1,63 +1,46 @@
 'use client'
-import React, { FormEventHandler, useState, useEffect } from 'react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
+import * as z from 'zod'
+import { aboutSchema } from '@/lib/validations/about';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-export default function AboutForm({id}: {id: string}) {
-  const [updatedAbout, setUpdatedAbout] = useState("")
-  const [showError, setShowError] = useState(false)
-  const characters = updatedAbout.length
-  const maxCharacters = 1000
+type FormData = z.infer<typeof aboutSchema>
+
+export default function AboutForm({id, about}: {id: string, about: string}) {
+  const userAbout = about
+  const form = useForm<FormData>({
+    defaultValues: {
+      about: userAbout
+    },
+    resolver: zodResolver(aboutSchema)
+  })
+
   const router = useRouter()
+  const { register, control, handleSubmit, formState } = form
 
-  useEffect(() => {
-    if (characters > maxCharacters) {
-      setShowError(true)
-    } else {
-      setShowError(false)
-    }
-  }, [characters])
-
-    useEffect(() => {
-    // Fetch the previous value of 'about' from the server and set it as the initial value
-    fetch(`/api/user/${id}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.about != null) {
-          setUpdatedAbout(data.about)
-        }
-      })
-      .catch(error => console.error(error))
-  }, [id])
-
-  const handleSubmit:FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (data: FormData) => {
+    console.log('\n ---Form submitted!--- \n', data.about)
     
-    if (characters <= maxCharacters) {
-      await fetch(`/api/user/${id}/about`, {
-        method: 'PATCH',                                                              
-        body: JSON.stringify({
-          about: updatedAbout 
-        })                             
-      })
-      setShowError(false)
-    } else {
-      setShowError(true)
-    }
-    setUpdatedAbout("")
+    await fetch(`/api/user/${id}/about`, {
+      method: 'PATCH',                                                              
+      body: JSON.stringify({
+        about: data.about
+      })                          
+    })
+
     router.refresh()
   }
+
   return (
-    <form onSubmit={handleSubmit} className='mt-4 flex flex-col w-full md:w-3/4'>
-        <textarea 
-          value={updatedAbout} 
-          onChange={(e) => setUpdatedAbout(e.target.value)}
+    <form onSubmit={handleSubmit(onSubmit)} className='mt-4 flex flex-col w-full md:w-3/4'>
+        <textarea  
           className='rounded p-2 text-base text-slate-800 bg-white resize-none w-full h-32 sm:h-48' 
+          {...register("about")}
         />
         <div className='flex justify-start text-xs'>
-          <p>{`${characters}/${maxCharacters}`}</p>
-          {
-            showError ? <h6 className='text-xs text-red-500 ml-4'>You have too many characters. Your changes won&apos;t be saved.</h6> : ""
-          }
+          <p>{`0/1000`}</p>
         </div>
         <div className='flex justify-end mt-4'>
             <button 
