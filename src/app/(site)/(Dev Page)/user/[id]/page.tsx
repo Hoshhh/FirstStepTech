@@ -31,6 +31,7 @@ export default async function page({ params }: {
         modalHeader={modal.skillsHeader} 
         modalDesc={modal.skillsDesc}
         isArray={true}
+        isLink={false}
         data={user.skills}
       >
         <SkillsForm id={params.id} skills={user.skills} />
@@ -42,6 +43,7 @@ export default async function page({ params }: {
         modalHeader={modal.aboutHeader} 
         modalDesc={modal.aboutDesc}
         isArray={false} 
+        isLink={false}
         data={user.about}
       >
         <AboutForm id={params.id} about={user.about} />
@@ -54,6 +56,7 @@ export default async function page({ params }: {
         modalHeader={modal.linksHeader} 
         modalDesc={modal.linksDesc}
         isArray={true} 
+        isLink={true}
         data={user.links}
       >
         <LinksForm id={params.id} links={user.links} />

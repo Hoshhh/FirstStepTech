@@ -12,11 +12,12 @@ type Container = {
     modalHeader: string,
     modalDesc: string,
     isArray: boolean,
+    isLink: boolean,
     data: string,
     children: React.ReactNode
 }
 
-export default function Container({ section, id, sessionId, modalHeader, modalDesc, isArray, data, children }: Container) {
+export default function Container({ section, id, sessionId, modalHeader, modalDesc, isArray, isLink, data, children }: Container) {
     const [isUser, setIsUser] = useState(false)
     const [showModal, setShowModal] = useState(false)
 
@@ -46,7 +47,7 @@ export default function Container({ section, id, sessionId, modalHeader, modalDe
         </div>
         <div>
             {
-                (isArray && data !== null) ? <UserData data={data} /> : <p>{data}</p>
+                (isArray && data !== null) ? <UserData data={data} isLink={isLink} /> : <p>{data}</p>
             }
         </div>
         <Modal isVisible={showModal} onClose={() => setShowModal(false)} modalHeader={modalHeader} modalDesc={modalDesc} >
