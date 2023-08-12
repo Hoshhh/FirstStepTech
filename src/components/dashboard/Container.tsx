@@ -46,7 +46,7 @@ export default function Container({ section, id, sessionId, modalHeader, modalDe
         </div>
         <div>
             {
-                isArray ? <UserData data={data} /> : <p>{data}</p>
+                (isArray && data !== null) ? <UserData data={data} /> : <p>{data}</p>
             }
         </div>
         <Modal isVisible={showModal} onClose={() => setShowModal(false)} modalHeader={modalHeader} modalDesc={modalDesc} >

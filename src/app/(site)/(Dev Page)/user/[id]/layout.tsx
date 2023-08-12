@@ -17,7 +17,7 @@ export default async function UserLayout({
 
   return (
     <div className="md:grid md:grid-cols-4 md:gap-4 md:h-screen">
-      <div className='flex flex-col col-span-1 border-r-2 items-center'>
+      <div className='flex flex-col col-span-1 border-r-2 items-center md:sticky md:top-0 md:h-screen'>
         <Link href="/" className='text-2xl pt-8'>FirstStepTech</Link>
         <ProfileHeader id={params.id} />
         <div className='pt-12 h-full'>
@@ -30,7 +30,7 @@ export default async function UserLayout({
         </div>
         <SignoutButton />
       </div>
-      <div className='flex col-span-3 justify-center pb-4'>
+      <div className='flex col-span-3 justify-center pb-4 overflow-scroll overflow-x-hidden'>
         {children}
       </div>
     </div>

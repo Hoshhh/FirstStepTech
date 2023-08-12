@@ -18,18 +18,15 @@ export default function AboutForm({id, about}: {id: string, about: string}) {
   })
 
   const router = useRouter()
-  const { register, control, handleSubmit, formState } = form
+  const { register, handleSubmit } = form
 
   const onSubmit = async (data: FormData) => {
-    console.log('\n ---Form submitted!--- \n', data.about)
-    
     await fetch(`/api/user/${id}/about`, {
       method: 'PATCH',                                                              
       body: JSON.stringify({
         about: data.about
       })                          
     })
-
     router.refresh()
   }
 
@@ -39,8 +36,11 @@ export default function AboutForm({id, about}: {id: string, about: string}) {
           className='rounded p-2 text-base text-slate-800 bg-white resize-none w-full h-32 sm:h-48' 
           {...register("about")}
         />
-        <div className='flex justify-start text-xs'>
-          <p>{`0/1000`}</p>
+        <div className='flex justify-start text-xs mt-2'>
+          <p>{`${(form.watch('about').length)}/1000`}</p>
+          {
+            form.watch('about').length > 1000 ? <span className='text-xs text-red-500 ml-4'>Too many characters, your changes will not be saved</span> : ""
+          }
         </div>
         <div className='flex justify-end mt-4'>
             <button 
