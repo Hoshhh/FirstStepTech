@@ -10,29 +10,30 @@ type FormData = z.infer<typeof linksSchema>
 
 export default function LinksForm({ id, links }: { id: string, links: string }) {
   const inputStyle = "my-2 p-2 border border-slate-300 rounded w-full";
-  //const userSkills = JSON.parse(skills)
+  const userLinks = JSON.parse(links)
+  const defaultLinks = userLinks || ["","",""];
 
   const form = useForm<FormData>({
     defaultValues: {
-      links: ["", "", ""]
+      links: defaultLinks
     },
     resolver: zodResolver(linksSchema)
   })
 
   const router = useRouter()
-  const { register, control, handleSubmit, formState } = form
+  const { register, handleSubmit } = form
 
   const onSubmit = async (data: FormData) => {
     console.log('\n ---Form submitted!--- \n', JSON.stringify(data.links))
-    /*
-    await fetch(`/api/user/${id}/skills`, {
+
+    await fetch(`/api/user/${id}/links`, {
       method: 'PATCH',                                                              
       body: JSON.stringify({
-        skills: JSON.stringify(data.skills)
+        links: JSON.stringify(data.links)
       })                          
     })
 
-    router.refresh()*/
+    router.refresh()
   }
 
   return (

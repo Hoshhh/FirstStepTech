@@ -44,3 +44,36 @@ Updates a user's first and last name
 * **Method**
 
   `PATCH`
+
+Updates a user's skills section
+<br>
+
+- **URL**
+
+  /api/user/[id]/skills
+
+* **Method**
+
+  `PATCH`
+
+Updates a user's about section
+<br>
+
+- **URL**
+
+  /api/user/[id]/about
+
+* **Method**
+
+  `PATCH`
+
+Updates a user's links section
+<br>
+
+- **URL**
+
+  /api/user/[id]/links
+
+* **Method**
+
+  `PATCH`

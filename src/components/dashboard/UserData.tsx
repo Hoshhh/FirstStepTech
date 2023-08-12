@@ -8,14 +8,14 @@ export default function UserData({data, isLink} : {data: string, isLink: boolean
         {   !isLink ?
             parsedData.map((data: string, index: number) => {
                 return (
-                    <li key={index}>{data}</li>
+                    <li key={index} className='text-sm m-4 whitespace-pre-wrap'>{data}</li>
                 )
             })
             :
             parsedData.map((data: string, index: number) => {
                 return (
-                    <li key={index}>
-                        <Link href={data}>{data}</Link>
+                    <li key={index} className='text-sm m-2 whitespace-pre-wrap'>
+                        <a href={data} target='_blank'>{data}</a>
                     </li>
                 )
             })

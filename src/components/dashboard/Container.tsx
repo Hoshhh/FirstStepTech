@@ -47,7 +47,7 @@ export default function Container({ section, id, sessionId, modalHeader, modalDe
         </div>
         <div>
             {
-                (isArray && data !== null) ? <UserData data={data} isLink={isLink} /> : <p>{data}</p>
+                (isArray && data !== null) ? <UserData data={data} isLink={isLink} /> : <p className='text-sm m-4 whitespace-pre-wrap'>{data}</p>
             }
         </div>
         <Modal isVisible={showModal} onClose={() => setShowModal(false)} modalHeader={modalHeader} modalDesc={modalDesc} >

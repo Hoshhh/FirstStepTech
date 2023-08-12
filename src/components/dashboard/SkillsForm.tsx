@@ -11,10 +11,11 @@ type FormData = z.infer<typeof skillsSchema>
 export default function SkillsForm({ id, skills }: { id: string, skills: string }) {
   const inputStyle = "my-2 p-2 border border-slate-300 rounded w-full";
   const userSkills = JSON.parse(skills)
+  const defaultSkills = userSkills || ["","","","","",""]
 
   const form = useForm<FormData>({
     defaultValues: {
-      skills: [userSkills[0], userSkills[1], userSkills[2], userSkills[3], userSkills[4], userSkills[5]]
+      skills: defaultSkills
     },
     resolver: zodResolver(skillsSchema)
   })

@@ -10,9 +10,11 @@ type FormData = z.infer<typeof aboutSchema>
 
 export default function AboutForm({id, about}: {id: string, about: string}) {
   const userAbout = about
+  const defaultAbout = userAbout || ""
+
   const form = useForm<FormData>({
     defaultValues: {
-      about: userAbout
+      about: defaultAbout
     },
     resolver: zodResolver(aboutSchema)
   })

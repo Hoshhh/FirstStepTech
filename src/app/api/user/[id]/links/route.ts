@@ -15,16 +15,16 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
         //Get the request body and validate it
         const body = await request.json()
 
-        const updateSkills = await db.user.update({
+        const updateLinks = await db.user.update({
             where: {
                 id: params.id
             },
             data: {
-                skills: body.skills
+                links: body.links
             }
         })
 
-        return new Response(JSON.stringify(updateSkills), {
+        return new Response(JSON.stringify(updateLinks), {
             headers: {
                 'Access-Control-Allow-Origin': origin || "*",
                 'Content-Type': 'application/json'
