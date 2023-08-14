@@ -2,6 +2,7 @@ import AboutForm from '@/components/dashboard/AboutForm'
 import Container from '@/components/dashboard/Container'
 import LinksForm from '@/components/dashboard/LinksForm'
 import SkillsForm from '@/components/dashboard/SkillsForm'
+import AvailabilityForm from '@/components/dashboard/AvailabilityForm'
 import { getCurrentSession } from '@/lib/session'
 import React from 'react'
 
@@ -16,7 +17,9 @@ export default async function page({ params }: {
     aboutHeader : "Edit your about section",
     aboutDesc : "Let people know about you!",
     linksHeader : "Edit your links",
-    linksDesc : "Add links to your portfolio, Github, and LinkedIn"
+    linksDesc : "Add links to your portfolio, Github, and LinkedIn",
+    availHeader : "Edit your availability",
+    availDesc : "Let people know if you're looking for part time, full time, remote, etc."
   }
 
   const res = await fetch(`http://localhost:3000/api/user/${params.id}`)
@@ -60,6 +63,19 @@ export default async function page({ params }: {
         data={user.links}
       >
         <LinksForm id={params.id} links={user.links} />
+      </Container>
+
+      <Container 
+        section="Availability" 
+        id={params.id} 
+        sessionId={session?.user.id} 
+        modalHeader={modal.availHeader} 
+        modalDesc={modal.availDesc}
+        isArray={true} 
+        isLink={false}
+        data={user.availability}
+      >
+        <AvailabilityForm id={params.id} avail={user.availability} />
       </Container>
     </div>
   )
