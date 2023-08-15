@@ -77,3 +77,14 @@ Updates a user's links section
 * **Method**
 
   `PATCH`
+
+Updates a user's availability section
+<br>
+
+- **URL**
+
+  /api/user/[id]/availability
+
+* **Method**
+
+  `PATCH`
