@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from '@/lib/db'
 import { getCurrentSession } from "@/lib/session";
-import { nameSchema } from "@/lib/validations/name";
+import { infoSchema } from "@/lib/validations/info";
 
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
     const origin = request.headers.get('origin')
@@ -15,7 +15,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
         //Get the request body and validate it
         const body = await request.json()
-        const payload = nameSchema.parse(body)
+        const payload = infoSchema.parse(body)
 
 
         const updateName = await db.user.update({
@@ -24,7 +24,8 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
             },
             data: {
                 firstName: payload.firstName,
-                lastName: payload.lastName
+                lastName: payload.lastName,
+                role: payload.role
             }
         })
 

@@ -1,12 +1,14 @@
 import { User } from "next-auth"
 import { JWT } from "next-auth/jwt"
+import { UserRole } from "@prisma/client"
 
 type UserId = string
-type Name = String | null
+type Name = string | null
 
 declare module "next-auth/jwt" {
   interface JWT {
     id: UserId
+    role: UserRole
   }
 }
 
@@ -15,7 +17,8 @@ declare module "next-auth" {
     user: User & {
       id: UserId,
       firstName: Name,
-      lastName: Name
+      lastName: Name,
+      role: UserRole
     }
   }
 }

@@ -30,6 +30,7 @@ export const authOptions: NextAuthOptions = {
                         id: token.id,
                         firstName: token.firstName,
                         lastName: token.lastName,
+                        role: token.role
                     }
                 }
             }
@@ -57,7 +58,8 @@ export const authOptions: NextAuthOptions = {
                 picture: dbUser.image,
                 name: dbUser.name,
                 firstName: dbUser.firstName,
-                lastName: dbUser.lastName
+                lastName: dbUser.lastName,
+                role: dbUser.role
             }
         }
     }

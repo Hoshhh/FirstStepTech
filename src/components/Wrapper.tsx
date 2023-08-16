@@ -1,5 +1,5 @@
 import { getCurrentSession } from "@/lib/session"
-import NameForm from "./NameForm"
+import InfoForm from "./InfoForm"
 
 export default async function Wrapper({children,}: {children: React.ReactNode}) {
     const session = await getCurrentSession()
@@ -7,7 +7,7 @@ export default async function Wrapper({children,}: {children: React.ReactNode}) 
     if (session !== null) {
         if (session.user.firstName === null || session.user.lastName === null) {
             return (
-                <NameForm id={session.user.id} />
+                <InfoForm id={session.user.id} />
             )
         }
     }

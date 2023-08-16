@@ -8,6 +8,11 @@ datasource db {
     relationMode = "prisma"
 }
 
+enum UserRole {
+    REC
+    DEV
+}
+
 model Account {
     id                String   @id @default(cuid())
     userId            String
@@ -32,17 +37,19 @@ model Account {
 }
 
 model User {
-    id            String         @id @default(cuid())
+    id            String    @id @default(cuid())
     name          String?
     firstName     String?
     lastName      String?
-    email         String?        @unique
+    role          UserRole  @default(DEV)
+    email         String?   @unique
     emailVerified DateTime?
     image         String?
     skills        String?
-    about         String?        @db.VarChar(1000)
+    about         String?   @db.VarChar(1000)
     links         String?
     availability  String?
+
     accounts      Account[]
     UserFeedbacks UserFeedback[]
 }
