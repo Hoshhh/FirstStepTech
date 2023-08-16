@@ -34,12 +34,12 @@ Returns JSON data about a specific user
 
   `GET`
 
-Updates a user's first and last name
+Updates a user's needed information (first/last name, account type, etc.)
 <br>
 
 - **URL**
 
-  /api/user/[id]/name
+  /api/user/[id]/info
 
 * **Method**
 
