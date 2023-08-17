@@ -11,6 +11,7 @@ const Navbar = ({user}: {user:any}) => {
   const [shadow, setShow] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
+
   useEffect(() => {
     const handleShadow = () => {
       if (window.scrollY >= 90) {
@@ -77,7 +78,7 @@ const Navbar = ({user}: {user:any}) => {
                     <div className="absolute right-0 mt-2 w-40 bg-white rounded shadow">
                         <ul className="py-2">
                             <li className="px-4 py-2 hover:bg-gray-200">
-                                <Link href={`/user/${user?.id}`}>Profile</Link>
+                                <Link href={user.role === "REC" ? `/recruiter/${user?.id}` : `/user/${user?.id}` }>Profile</Link>
                             </li>
                             <li className="px-4 py-2 hover:bg-gray-200" onClick={() => signOut()}>
                                 Sign Out
