@@ -1,8 +1,3 @@
-import AboutForm from '@/components/dashboard/AboutForm'
-import Container from '@/components/dashboard/Container'
-import LinksForm from '@/components/dashboard/LinksForm'
-import SkillsForm from '@/components/dashboard/SkillsForm'
-import AvailabilityForm from '@/components/dashboard/AvailabilityForm'
 import { getCurrentSession } from '@/lib/session'
 import React from 'react'
 
@@ -16,7 +11,7 @@ export default async function page({ params }: {
 
   return (
     <div className='flex flex-col w-full sm:w-3/4 items-center mt-16 mb-auto'>
-      Test
+      home
     </div>
   )
 }

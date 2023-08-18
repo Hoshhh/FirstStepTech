@@ -1,7 +1,6 @@
 
 import Link from 'next/link'
 import React from 'react'
-import { FaSignOutAlt } from 'react-icons/fa'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import SignoutButton from '@/components/profile/SignoutButton'
@@ -15,10 +14,10 @@ export default async function UserLayout({
     params: { id: string }
 }) {
 
-    const session = await getServerSession(authOptions)
-    if (session?.user.role !== "REC") {
-      throw new Error("This page is for Recruiters only.")
-    }
+  const session = await getServerSession(authOptions)
+  if (session?.user.role !== "REC") {
+    throw new Error("This page is for Recruiters only.")
+  }
 
   return (
     <div className="md:grid md:grid-cols-4 md:gap-4 md:h-screen">
@@ -27,8 +26,12 @@ export default async function UserLayout({
         <ProfileHeader id={params.id} />
         <div className='pt-12 h-full'>
           <ul className='grid grid-rows-5 content-between h-full'>
-            <Link href={`/recruiter/${params.id}`} >Dashboard</Link>
-            <Link href={`/recruiter/${params.id}/applications`} >Job Postings</Link>
+            <Link 
+              href={`/recruiter/${params.id}`}
+            >
+              Dashboard
+            </Link>
+            <Link href={`/recruiter/${params.id}/jobs`} >Job Postings</Link>
             <Link href={`/recruiter/${params.id}/analytics`} >Analytics</Link>
             <Link href={`/recruiter/${params.id}/feedback`} >Feedback</Link>
           </ul>
