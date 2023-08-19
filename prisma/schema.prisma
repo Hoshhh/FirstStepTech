@@ -52,6 +52,26 @@ model User {
 
     accounts      Account[]
     UserFeedbacks UserFeedback[]
+
+    jobPosts     JobPost[] @relation("Author")
+    applications JobPost[] @relation("Applicant")
+}
+
+model JobPost {
+    id        String   @id @default(cuid())
+    createdAt DateTime
+    updatedAt DateTime
+    author    User     @relation("Author", fields: [authorId], references: [id])
+    authorId  String
+    postition String
+    company   String
+    skills    String
+    location  String?
+    workplace String
+
+    applicants User[] @relation("Applicant")
+
+    @@index([authorId])
 }
 
 model UserFeedback {
