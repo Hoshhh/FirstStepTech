@@ -53,25 +53,28 @@ model User {
     accounts      Account[]
     UserFeedbacks UserFeedback[]
 
-    jobPosts     JobPost[] @relation("Author")
+    jobPosts     JobPost[]
     applications JobPost[] @relation("Applicant")
+
+    @@map(name: "users")
 }
 
 model JobPost {
-    id        String   @id @default(cuid())
-    createdAt DateTime
-    updatedAt DateTime
-    author    User     @relation("Author", fields: [authorId], references: [id])
-    authorId  String
-    postition String
-    company   String
-    skills    String
-    location  String?
-    workplace String
+    id         String   @id @default(cuid())
+    createdAt  DateTime @default(now()) @map(name: "created_at")
+    updatedAt  DateTime @default(now()) @map(name: "updated_at")
+    postition  String
+    company    String
+    skills     String
+    location   String?
+    workplace  String
+    authorId   String
+    applicants User[]   @relation("Applicant")
 
-    applicants User[] @relation("Applicant")
+    author User @relation(fields: [authorId], references: [id])
 
     @@index([authorId])
+    @@map(name: "posts")
 }
 
 model UserFeedback {
