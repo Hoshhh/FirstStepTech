@@ -37,26 +37,23 @@ model Account {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String         @id @default(cuid())
     name          String?
     firstName     String?
     lastName      String?
-    role          UserRole  @default(DEV)
-    email         String?   @unique
+    role          UserRole       @default(DEV)
+    email         String?        @unique
     emailVerified DateTime?
     image         String?
     skills        String?
-    about         String?   @db.VarChar(1000)
+    about         String?        @db.VarChar(1000)
     links         String?
     availability  String?
-
     accounts      Account[]
     UserFeedbacks UserFeedback[]
 
     jobPosts     JobPost[]
     applications JobPost[] @relation("Applicant")
-
-    @@map(name: "users")
 }
 
 model JobPost {

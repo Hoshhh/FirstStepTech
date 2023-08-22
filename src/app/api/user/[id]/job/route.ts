@@ -1,3 +1,4 @@
+/*
 import { NextRequest, NextResponse } from "next/server";
 import { db } from '@/lib/db'
 import { getCurrentSession } from "@/lib/session";
@@ -40,4 +41,4 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     } catch (error) {
         return new NextResponse("Database error", {status: 500})
     }
-}
+}*/
