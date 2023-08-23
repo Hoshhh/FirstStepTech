@@ -1,7 +1,8 @@
-/*
+
 import { NextRequest, NextResponse } from "next/server";
 import { db } from '@/lib/db'
 import { getCurrentSession } from "@/lib/session";
+import { jobBackSchema } from "@/lib/validations/job";
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
     const origin = request.headers.get('origin')
@@ -15,15 +16,16 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 
         //Get the request body and validate it
         const body = await request.json()
+        const payload = jobBackSchema.parse(body)
 
         const createJob = await db.jobPost.create({
             data: {
                 authorId: session.user.id,
-                postition: body.postition,
-                company: body.company,
-                skills: body.skills,
-                location: body.location,
-                workplace: body.workplace,
+                postition: payload.position,
+                company: payload.company,
+                skills: payload.skills,
+                workplace: payload.workplace,
+                location: payload.location,
             },
             select: {
                 id: true,
@@ -41,4 +43,4 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     } catch (error) {
         return new NextResponse("Database error", {status: 500})
     }
-}*/
+}
