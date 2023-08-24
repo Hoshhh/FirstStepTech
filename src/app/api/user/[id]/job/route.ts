@@ -25,7 +25,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
                 company: payload.company,
                 skills: payload.skills,
                 workplace: payload.workplace,
-                location: payload.location,
+                location: payload.location,                
             },
             select: {
                 id: true,
@@ -41,6 +41,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
         })
 
     } catch (error) {
+        console.error("Error:", error);
         return new NextResponse("Database error", {status: 500})
     }
 }

@@ -2,7 +2,9 @@ import JobContainer from '@/components/recruiter/JobContainer'
 import Link from 'next/link'
 import React from 'react'
 
-export default function page() {
+export default function page({ params }: {
+  params: { id: string }
+}) {
   return (
     <div className='w-full sm:w-3/4 mt-16 mb-auto'>
       <div className='text-center'>

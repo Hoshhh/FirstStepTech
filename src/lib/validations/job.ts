@@ -11,7 +11,7 @@ export const jobFrontSchema = z.object({
 export const jobBackSchema = z.object({
     position: z.string().trim(),
     company: z.string().max(32).trim(),
-    skills: z.string().max(12).trim().toLowerCase(),
+    skills: z.string().trim().toLowerCase(),
     workplace: z.string().trim(),
     location: z.string().trim(),
 })

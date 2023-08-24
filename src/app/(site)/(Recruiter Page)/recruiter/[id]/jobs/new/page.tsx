@@ -5,10 +5,13 @@ import React from 'react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation'
 
 type FormData = z.infer<typeof jobFrontSchema>
 
-export default function page() {
+export default function page({ params }: {
+  params: { id: string }
+}) {
     const inputStyle = "my-2 p-2 border border-slate-300 rounded w-full md:w-3/4";
     const defaultSkills = ["","",""]
 
@@ -23,21 +26,24 @@ export default function page() {
         resolver: zodResolver(jobFrontSchema)
     })
 
-    //const router = useRouter()
+    const router = useRouter()
     const { register, control, handleSubmit, formState } = form
 
     const onSubmit = async (data: FormData) => {
         console.log('\n ---Form submitted!--- \n', JSON.stringify(data))
 
-        /*
-        await fetch(`/api/user/${id}/skills`, {
-        method: 'PATCH',                                                              
-        body: JSON.stringify({
-            skills: JSON.stringify(data.skills)
-        })                          
-        })*/
+        await fetch(`/api/user/${params.id}/job`, {
+            method: 'POST',                                                              
+            body: JSON.stringify({
+                position: data.position,
+                company: data.company,
+                skills: JSON.stringify(data.skills),
+                workplace: data.workplace,
+                location: data.location
+            })                          
+        })
 
-        //router.refresh()
+        router.refresh()
     }
 
     return (
