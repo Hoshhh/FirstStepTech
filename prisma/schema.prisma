@@ -45,10 +45,10 @@ model User {
     email         String?        @unique
     emailVerified DateTime?
     image         String?
-    skills        String?
     about         String?        @db.VarChar(1000)
     links         String?
     availability  String?
+    skills        Skills[]
     accounts      Account[]
     UserFeedbacks UserFeedback[]
 
@@ -72,6 +72,24 @@ model JobPost {
 
     @@index([authorId])
     @@map(name: "posts")
+}
+
+model Skills {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now()) @map(name: "created_at")
+    updatedAt DateTime @default(now()) @map(name: "updated_at")
+    skill1    String?
+    skill2    String?
+    skill3    String?
+    skill4    String?
+    skill5    String?
+    skill6    String?
+    authorId  String
+
+    author User @relation(fields: [authorId], references: [id])
+
+    @@index([authorId])
+    @@map(name: "skills")
 }
 
 model UserFeedback {
