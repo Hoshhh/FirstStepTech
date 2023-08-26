@@ -25,6 +25,15 @@ export default async function page({ params }: {
   const res = await fetch(`http://localhost:3000/api/user/${params.id}`)
   const user = await res.json()
 
+  const resSkills = await fetch(`http://localhost:3000/api/user/${params.id}/skills`)
+  const userSkills = await resSkills.json()
+
+  const skills = JSON.stringify(Object.keys(userSkills)
+  .filter(key => key.startsWith('skill') && userSkills[key] !== null && userSkills[key] !== '')
+  .map(key => userSkills[key]));
+
+  console.log(skills)
+
   return (
     <div className='flex flex-col w-full sm:w-3/4 items-center mt-16 mb-auto'>
       <Container 
@@ -35,9 +44,9 @@ export default async function page({ params }: {
         modalDesc={modal.skillsDesc}
         isArray={true}
         isLink={false}
-        data={user.skills}
+        data={skills}
       >
-        <SkillsForm id={params.id} skills={user.skills} />
+        <SkillsForm id={params.id} skills={skills} />
       </Container>
       <Container 
         section="About" 

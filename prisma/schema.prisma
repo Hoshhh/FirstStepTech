@@ -48,7 +48,7 @@ model User {
     about         String?        @db.VarChar(1000)
     links         String?
     availability  String?
-    skills        Skills[]
+    skills        Skills?
     accounts      Account[]
     UserFeedbacks UserFeedback[]
 
@@ -84,7 +84,7 @@ model Skills {
     skill4    String?
     skill5    String?
     skill6    String?
-    authorId  String
+    authorId  String   @unique
 
     author User @relation(fields: [authorId], references: [id])
 

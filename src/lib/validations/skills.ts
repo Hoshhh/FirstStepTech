@@ -1,5 +1,12 @@
 import * as z from "zod"
 
 export const skillsSchema = z.object({
-    skills: z.array(z.string().max(12).trim().toLowerCase()).transform((val) => val.filter((value) => value !== "")),
+    skills: z.object({
+        skill1: z.string().max(12).trim().toLowerCase(),
+        skill2: z.string().max(12).trim().toLowerCase(),
+        skill3: z.string().max(12).trim().toLowerCase(),
+        skill4: z.string().max(12).trim().toLowerCase(),
+        skill5: z.string().max(12).trim().toLowerCase(),
+        skill6: z.string().max(12).trim().toLowerCase(),
+    })
 })

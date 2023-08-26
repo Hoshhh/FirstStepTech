@@ -29,6 +29,21 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
             }
         })
 
+        //If the user is a Developer, create a new skill table for them
+        if (payload.role === "DEV") {
+            await db.skills.create({
+                data: {
+                    authorId: session.user.id,
+                    skill1: null,
+                    skill2: null,
+                    skill3: null,
+                    skill4: null,
+                    skill5: null,
+                    skill6: null,
+                }
+            })
+        }
+
         return new Response(JSON.stringify(updateName), {
             headers: {
                 'Access-Control-Allow-Origin': origin || "*",
