@@ -11,7 +11,7 @@ export default function page({ params }: {
         <h2 className='tracking-widest '>Your Job Postings</h2>
       </div>
       <div className='flex flex-col items-center mt-8'>
-        <Link href="/recruiter/cllmhnydo0003hr9sxyqospei/jobs/new" className="p-2 pl-4 pr-4 mt-2 mb-8 text-sm text-center rounded-full text-slate-100 bg-sky-700 w-3/4 sm:w-2/6">Add Job</Link>
+        <Link href={`/recruiter/${params.id}/jobs/new`} className="p-2 pl-4 pr-4 mt-2 mb-8 text-sm text-center rounded-full text-slate-100 bg-sky-700 w-3/4 sm:w-2/6">Add Job</Link>
         <JobContainer />
       </div>
     </div>

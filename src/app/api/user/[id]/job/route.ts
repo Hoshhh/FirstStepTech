@@ -18,6 +18,24 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
         const body = await request.json()
         const payload = jobBackSchema.parse(body)
 
+        const skills = JSON.parse(body.skills);
+        const matchingUsers = await db.user.findMany({
+            where: {
+                //Fill in after rewrite
+                OR: [
+                    { skills: {skill1: { in: skills } }},
+                    { skills: {skill2: { in: skills } }},
+                    { skills: {skill3: { in: skills } }},
+                    { skills: {skill4: { in: skills } }},
+                    { skills: {skill5: { in: skills } }},
+                    { skills: {skill6: { in: skills } }}
+                ]
+            },
+            select: {
+                id: true
+            }
+        });
+        console.log(matchingUsers)
         const createJob = await db.jobPost.create({
             data: {
                 authorId: session.user.id,
@@ -25,7 +43,8 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
                 company: payload.company,
                 skills: payload.skills,
                 workplace: payload.workplace,
-                location: payload.location,                
+                location: payload.location, 
+                applicants: {connect: matchingUsers}             
             },
             select: {
                 id: true,
