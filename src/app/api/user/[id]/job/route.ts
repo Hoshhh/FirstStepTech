@@ -4,6 +4,45 @@ import { db } from '@/lib/db'
 import { getCurrentSession } from "@/lib/session";
 import { jobBackSchema } from "@/lib/validations/job";
 
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+
+    const origin = request.headers.get('origin')
+
+    try {
+        const userJobs = await db.jobPost.findMany({
+            where: {
+                authorId: params.id
+            }
+        })
+
+        console.log(params.id)
+
+        // Check if there are job postings
+        if (userJobs.length === 0) {
+            return new Response(JSON.stringify([]), {
+                headers: {
+                    'Access-Control-Allow-Origin': origin || "*",
+                    'Content-Type': 'application/json'
+                },
+                status: 200
+            })
+        } else {
+            return new Response(JSON.stringify(userJobs), {
+                headers: {
+                    'Access-Control-Allow-Origin': origin || "*",
+                    'Content-Type': 'application/json'
+                },
+                status: 200
+            })
+        }
+    } catch (error) {
+        console.error("Database error:", error);
+        return new Response("Database error", {status: 500})
+    }
+}
+
+
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
     const origin = request.headers.get('origin')
 
@@ -95,7 +134,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
         const createJob = await db.jobPost.create({
             data: {
                 authorId: session.user.id,
-                postition: payload.position,
+                position: payload.position,
                 company: payload.company,
                 skills: payload.skills,
                 workplace: payload.workplace,

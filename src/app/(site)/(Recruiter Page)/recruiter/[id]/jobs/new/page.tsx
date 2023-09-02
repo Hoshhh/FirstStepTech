@@ -32,7 +32,7 @@ export default function page({ params }: {
     const onSubmit = async (data: FormData) => {
         console.log('\n ---Form submitted!--- \n', JSON.stringify(data))
 
-        await fetch(`/api/user/${params.id}/job`, {
+        await fetch(`/api/user/${params.id}/jobs`, {
             method: 'POST',                                                              
             body: JSON.stringify({
                 position: data.position,

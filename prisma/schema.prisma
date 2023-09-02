@@ -60,7 +60,7 @@ model JobPost {
     id         String   @id @default(cuid())
     createdAt  DateTime @default(now()) @map(name: "created_at")
     updatedAt  DateTime @default(now()) @map(name: "updated_at")
-    postition  String
+    position   String
     company    String
     skills     String
     location   String?
