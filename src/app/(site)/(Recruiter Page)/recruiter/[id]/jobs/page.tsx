@@ -15,7 +15,7 @@ type Job = {
 export default async function page({ params }: {
   params: { id: string }
 }) {
-    const res = await fetch(`http://localhost:3000/api/user/${params.id}/job`, {
+    const res = await fetch(`http://localhost:3000/api/user/${params.id}/jobs`, {
       method: 'GET'
     })
 
