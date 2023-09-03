@@ -13,10 +13,11 @@ export async function GET(request: Request, { params }: { params: { id: string }
         const userJobs = await db.jobPost.findMany({
             where: {
                 authorId: params.id
+            },
+            include: {
+                applicants: true, // Include the applicants relationship
             }
         })
-
-        console.log(params.id)
 
         // Check if there are job postings
         if (userJobs.length === 0) {
@@ -130,7 +131,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
                 id: true
             }
         });
-        console.log(matchingUsers)
+
         const createJob = await db.jobPost.create({
             data: {
                 authorId: session.user.id,

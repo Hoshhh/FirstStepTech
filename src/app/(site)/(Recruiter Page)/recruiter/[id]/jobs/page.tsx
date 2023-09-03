@@ -16,7 +16,8 @@ export default async function page({ params }: {
   params: { id: string }
 }) {
     const res = await fetch(`http://localhost:3000/api/user/${params.id}/jobs`, {
-      method: 'GET'
+      method: 'GET',
+      cache: 'no-store'
     })
 
     
