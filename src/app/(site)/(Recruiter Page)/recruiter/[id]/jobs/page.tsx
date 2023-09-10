@@ -9,7 +9,8 @@ type Job = {
     skills: string,
     location: string | null,
     workplace: string,
-    author: string,
+    authorId: string,
+    applicants: []
 }
 
 export default async function page({ params }: {
@@ -22,7 +23,7 @@ export default async function page({ params }: {
 
     
     const userJobs = await res.json()
-    console.log(userJobs)
+    //console.log(userJobs[0].applicants[0])
 
   return (
     <div className='w-full sm:w-3/4 mt-16 mb-auto'>
@@ -40,7 +41,8 @@ export default async function page({ params }: {
             skills={job.skills} 
             location={job.location} 
             workplace={job.workplace}
-            author={job.author}
+            authorId={job.authorId}
+            applicants={job.applicants}
           />
         ))
         }
